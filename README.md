@@ -1,4 +1,4 @@
-﻿# 🚀 Guia ompleto de pós-instalação e customização de pacotes no Ubuntu
+# 🚀 Guia Completo de Pós-instalação e Customização de Pacotes no Ubuntu
 
 ## 📦 Instalar os pacotes git e npm e depois atualizar o sistema:
 ```bash
@@ -40,11 +40,6 @@ nvm use 22.12.0
 ```
 
 ## 🐍 Instalar Python a partir do código-fonte
-
-### 📥 Baixar o código-fonte:
-```bash
-wget https://www.python.org/ftp/python/3.13.3/Python-3.13.3.tar.xz
-```
 
 ### 📁 Extrair e entrar no diretório:
 ```bash
@@ -95,10 +90,15 @@ source ~/.bashrc
 ```bash
 pyenv update
 pyenv install -l
-pyenv install 3.14.0
-pyenv global 3.14.0
+pyenv install 3.14.2
+pyenv global 3.14.2
 ```
-sudo snap install gradle --classic
+
+### 📦 Instalar Maven
+```bash
+sudo apt install maven -y
+mvn -version
+```
 
 ## ☕ Instalar Java (OpenJDK):
 ```bash
@@ -166,6 +166,12 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 flatpak install flathub com.obsproject.Studio -y
 ```
 
+### 🎧 Instalar Blanket (sons de fundo)
+```bash
+flatpak install flathub com.rafaelmardojai.Blanket -y
+flatpak run com.rafaelmardojai.Blanket (se não aparecer o ícone para executar)
+```
+
 ### 💻 VS Code
 ```bash
 sudo snap install code --classic
@@ -179,11 +185,6 @@ sudo snap install intellij-idea-community --classic
 ### 🌍 Eclipse
 ```bash
 sudo snap install eclipse --classic
-```
-
-### 🐍 PyCharm
-```bash
-sudo snap install pycharm-community --classic
 ```
 
 ### 🔺 Angular CLI
@@ -209,13 +210,12 @@ sudo apt install gdebi -y
 sudo apt install gnome-tweaks -y
 sudo snap install vlc --classic
 sudo snap install amberol --classic
-sudo snap install guvcview --classic
-sudo snap install miro
 ```
 
-## 🔄 Modernizar repositórios APT
+## 🔄 Limpar pacotes antigos
 ```bash
-sudo apt modernize-sources
+sudo apt autoremove -y
+sudo apt autoclean
 ```
 
 ## 🧩 Zsh + Oh My Zsh + Spaceship Prompt - Ubuntu 22.04
