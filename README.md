@@ -1,507 +1,128 @@
-# 🚀 Guia Completo de Pós-instalação e Customização de Pacotes no Ubuntu (Padrão Bash)
+# 🐧 Ubuntu Dev Workstation — Setup Técnico & Pós-Instalação
 
-> **Ambiente:** Ubuntu Linux (x86_64)  
-> **Mantenedor:** Lucivaldo Junior (Luci Junior)  
-> **Orquestração & Documentação:** Agente Pessoal Lucy (Ecossistema Nexus)  
-> **Stack Principal:** Java 21 LTS | Go 1.26+ | Node.js | Docker | AWS | IA Local  
-> **Shell Padrão:** Bash Nativo (`~/.bashrc`)  
-
----
-
-## 📋 Sumário
-1. [📦 Atualização do Sistema & Pacotes Essenciais](#1--atualização-do-sistema--pacotes-essenciais)
-2. [🎛️ Utilitários Principais do Sistema (Flatpak, GNOME Tweaks & Periféricos)](#2-️-utilitários-principais-do-sistema-flatpak-gnome-tweaks--periféricos)
-3. [🌐 Navegador Web (Google Chrome)](#3--navegador-web-google-chrome)
-4. [🟢 Ecossistema Node.js & NVM](#4--ecossistema-nodejs--nvm)
-5. [🦫 Linguagem Go (Golang 1.26+)](#5--linguagem-go-golang-126)
-6. [☕ Linguagem Java (OpenJDK 21 LTS & Maven)](#6--linguagem-java-openjdk-21-lts--maven)
-7. [🐍 Python 3.14 (Compilação a partir da Fonte & Pyenv)](#7--python-314-compilação-a-partir-da-fonte--pyenv)
-8. [🐳 Docker Engine, Docker Compose & Containers](#8--docker-engine-docker-compose--containers)
-9. [☁️ AWS CLI v2 & Rclone (Nuvem & Backup)](#9--aws-cli-v2--rclone-nuvem--backup)
-10. [🛠️ IDEs, Editores & Inteligência Artificial](#10-️-ides-editores--inteligência-artificial)
-11. [💬 Comunicação & Mensageria](#11--comunicação--mensageria)
-12. [🎨 Multimídia, Gravação & Design](#12--multimídia-gravação--design)
-13. [🎮 Jogos & Emulação Retrô](#13--jogos--emulação-retrô)
-14. [🗄️ Bancos de Dados Locais (PostgreSQL & MySQL)](#14-️-bancos-de-dados-locais-postgresql--mysql)
-15. [🧹 Manutenção, Faxina & Limpeza do Sistema](#15--manutenção-faxina--limpeza-do-sistema)
+<p align="center">
+  <img src="https://img.shields.io/badge/OS-Ubuntu%2026.04.1%20LTS-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu" />
+  <img src="https://img.shields.io/badge/Shell-Bash%20%7C%20Zsh-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Shell" />
+  <img src="https://img.shields.io/badge/Docker-Engine%20%26%20Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/Java-21%20LTS-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
+  <img src="https://img.shields.io/badge/Go-1.22%2B-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go" />
+  <img src="https://img.shields.io/badge/Cloud-AWS%20CLI%20v2-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" alt="AWS" />
+  <img src="https://img.shields.io/badge/License-MIT-007ACC?style=for-the-badge" alt="License" />
+</p>
 
 ---
 
-## 1. 📦 Atualização do Sistema & Pacotes Essenciais
+## 📌 Visão Geral
 
-Atualizar os índices de repositórios, os pacotes instalados no sistema e carregar as bibliotecas básicas de compilação:
+Este repositório reúne um guia consolidado e padronizado de **pós-instalação, automação de ambiente e configuração de workstations Ubuntu** voltado para Engenharia de Software Back-end, Cloud/DevOps e Produtividade.
 
-```bash
-# Atualiza a lista de pacotes e realiza a atualização geral do sistema operacional
-sudo apt update && sudo apt upgrade -y
-
-# Instala ferramentas essenciais de build (GCC, G++, Make), Git, Curl e utilitários de compressão
-sudo apt install -y build-essential git curl wget unzip software-properties-gtk
-```
+O foco central é transformar uma instalação limpa do Ubuntu em uma máquina de alta performance, estável e pronta para compilação, containerização e operação corporativa, eliminando retrabalho de setup manual.
 
 ---
 
-## 2. 🎛️ Utilitários Principais do Sistema (Flatpak, GNOME Tweaks & Periféricos)
+## 🧭 Rotas de Shell Disponíveis
 
-Categoria unificada com os utilitários indispensáveis para gerenciamento de pacotes, personalização visual do GNOME, integração de periféricos e virtualização:
+O repositório oferece **duas abordagens independentes de personalização**. Escolha a que melhor atende ao seu fluxo de trabalho:
 
-### 📦 Flatpak & Flathub (Gerenciador Universal de Pacotes Sandbox):
-```bash
-# Instala o suporte a Flatpak e o plugin de integração com a GNOME Software
-sudo apt install -y flatpak gnome-software-plugin-flatpak
-
-# Adiciona o repositório oficial Flathub
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-```
-
-### 🔧 GNOME Tweaks & Extension Manager (Personalização do Desktop):
-```bash
-# Ajustes finos de fontes, janelas, comportamento do mouse e gerenciamento de extensões do GNOME Shell
-sudo apt install -y gnome-tweaks gnome-shell-extension-manager
-```
-
-### 🎛️ Gear Lever (Gerenciamento e Integração Ágil de AppImages):
-```bash
-# Permite abrir, atualizar e integrar arquivos AppImage diretamente no menu de aplicativos
-flatpak install flathub it.mijorus.gearlever -y
-```
-
-### 🖱️ Solaar (Gerenciador de Periféricos sem Fio Logitech):
-```bash
-# Monitoramento de bateria e ajustes de emparelhamento para mouses e teclados Logitech
-sudo apt install -y solaar
-```
-
-### 🎮 Input Remapper (Remapeamento Avançado de Teclas e Controles):
-```bash
-# Mapeamento flexível de botões de mouse para funções customizadas, macros e gamepads
-sudo apt install -y input-remapper-gtk
-```
-
-### 📦 Gdebi (Instalador Gráfico Leve de Pacotes .deb):
-```bash
-# Instala arquivos .deb locais resolvendo e baixando automaticamente as dependências necessárias
-sudo apt install -y gdebi
-```
-
-### 🖥️ VirtualBox (Virtualização Completa de Sistemas):
-```bash
-# Virtualização de máquinas virtuais completas (Windows Server, distribuições Linux, etc.)
-sudo apt install -y virtualbox-qt
-```
+| Rota | Documento | Foco | Destaques |
+| :--- | :--- | :--- | :--- |
+| **Bash Nativo** | [Customização_Ubuntu_padrao_bash.md](Customização_Ubuntu_padrao_bash.md) | Simplicidade e Estabilidade | Mantém o shell padrão do Ubuntu com aliases produtivos, sem overhead de plugins externos. |
+| **Zsh + Oh My Zsh** | [Customização_Ubuntu_zsh_oh_myZsh.md](Customização_Ubuntu_zsh_oh_myZsh.md) | Produtividade e Visual Moderno | Tema Spaceship, autossugestão de comandos, realce de sintaxe em tempo real e plugins do ecossistema Zsh. |
 
 ---
 
-## 3. 🌐 Navegador Web (Google Chrome)
+## 🛠️ Matriz do Toolchain & Tecnologias
 
-Instalação oficial do Google Chrome via pacote `.deb` estável:
+O provisionamento cobre todo o ciclo de ferramentas necessárias para desenvolvimento profissional:
 
-```bash
-# Baixa o pacote oficial do Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+### 1. Runtimes & Linguagens
+* **Java 21 LTS:** OpenJDK para desenvolvimento corporativo e Spring Boot.
+* **Go (Golang 1.22+):** Compilação de alta performance, microserviços e CLIs.
+* **Node.js (LTS):** Gerenciado via NVM (Node Version Manager) para isolamento de versões.
+* **Python 3.12+:** Gerenciado via Pyenv para virtual environments limpos.
 
-# Instala o pacote via dpkg e resolve eventuais dependências faltantes
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-sudo apt --fix-broken install -y
+### 2. Infraestrutura & Nuvem
+* **Docker Engine & Docker Compose:** Instalação oficial via repositório APT da Docker (sem sudo obrigatório).
+* **AWS CLI v2:** Integração com serviços de nuvem e automações de infra.
+* **Rclone:** Sincronização incremental e rotinas de backup com armazenamento em nuvem.
 
-# Remove o instalador temporário
-rm -f google-chrome-stable_current_amd64.deb
+### 3. IDEs, IA & Produtividade
+* **IDEs:** Antigravity IDE, Visual Studio Code e IntelliJ IDEA Community.
+* **Inteligência Artificial:** Ollama (execução local acelerada por GPU) e Antigravity CLI (`agy`).
+* **Testes de API & Git:** Postman e GitHub Desktop.
+* **Mensageria:** Telegram Desktop, Discord e Whatsie.
+
+### 4. Manutenção & Saúde do SO
+* Scripting de limpeza e remoção de órfãos para **APT**, **Snap** e **Flatpak**.
+
+---
+
+## 🚀 Fluxo Recomendado de Execução
+
+Ao configurar uma máquina do zero, execute as etapas nesta ordem lógica:
+
+```text
+[1. Update do SO] ──> [2. Escolha do Shell] ──> [3. Runtimes (Java/Go/Node/Python)]
+                                                            │
+[6. IDEs & IA]    <── [5. Cloud & Backup]   <── [4. Docker & Containers]
+       │
+       ▼
+[7. Limpeza & Validação Final]
+```
+
+1. **Atualização Base:** Atualize índices de pacotes (`apt update && apt upgrade`).
+2. **Seleção de Shell:** Abra o guia do [Bash](Customização_Ubuntu_padrao_bash.md) ou do [Zsh](Customização_Ubuntu_zsh_oh_myZsh.md).
+3. **Linguagens:** Instale compiladores e gerenciadores de versão em etapas separadas.
+4. **Virtualização:** Configure Docker Engine e permissões do grupo do usuário.
+5. **Nuvem:** Configure credenciais da AWS e destinos no Rclone.
+6. **Workspace:** Instale editores, IDEs e runners locais de IA.
+7. **Sanitização:** Execute a rotina de faxina para manter o disco limpo e enxuto.
+
+---
+
+## 🗂️ Estrutura de Arquivos
+
+```text
+.
+├── Customização_Ubuntu_padrao_bash.md   # Guia detalhado para Shell Bash nativo
+├── Customização_Ubuntu_zsh_oh_myZsh.md  # Guia detalhado para Shell Zsh + Oh My Zsh
+├── README.md                            # Documentação principal e índice técnico
+└── LICENSE                              # Licença MIT de uso e distribuição
 ```
 
 ---
 
-## 4. 🟢 Ecossistema Node.js & NVM
+## 💡 Recomendações Técnicas
 
-Gerenciador de versões NVM para evitar conflitos de permissão e alternar facilmente entre versões:
-
-```bash
-# Instala o NVM (Node Version Manager)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-
-# Carrega as variáveis do NVM no ~/.bashrc
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# Instala a versão LTS mais recente e a define como padrão
-nvm install --lts
-nvm use --lts
-nvm alias default 'lts/*'
-
-# Instala TypeScript e utilitários globais
-npm install -g typescript @angular/cli
-```
+* **Backup prévio:** Sempre faça backup de `~/.bashrc`, `~/.zshrc` e variáveis de ambiente antes de customizações profundas de PATH.
+* **Permissões Docker:** Adicione o usuário ao grupo `docker` e reinicie a sessão antes de rodar containers sem privilégios de superusuário.
+* **Instalação Modular:** Prefira instalar cada stack em blocos independentes para isolar eventuais falhas de dependência de rede ou repositório.
 
 ---
 
-## 5. 🦫 Linguagem Go (Golang 1.26+)
+## 👨‍💻 Autor & Contato
 
-Instalação limpa do runtime oficial de Go a partir do binário compilado:
-
-```bash
-# Remove instalações antigas e baixa a versão mais recente do Go
-sudo rm -rf /usr/local/go
-wget https://go.dev/dl/go1.26.4.linux-amd64.tar.gz
-
-# Extrai para /usr/local
-sudo tar -C /usr/local -xzf go1.26.4.linux-amd64.tar.gz
-rm -f go1.26.4.linux-amd64.tar.gz
-
-# Adiciona o Go ao PATH no ~/.bashrc
-echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> ~/.bashrc
-source ~/.bashrc
-
-# Valida a instalação
-go version
-```
-
----
-
-## 6. ☕ Linguagem Java (OpenJDK 21 LTS & Maven)
-
-Stack principal para desenvolvimento corporativo com Spring Boot:
-
-```bash
-# Instala o JDK 21 LTS e Maven
-sudo apt install -y openjdk-21-jdk maven
-
-# Valida as versões instaladas
-java -version
-javac -version
-mvn -version
-```
-
-*(Opcional: Para compatibilidade com projetos legados JDK 11: `sudo apt install -y openjdk-11-jdk`)*
+<table align="center">
+  <tr>
+    <td align="center">
+      <b>Lucivaldo Junior</b><br>
+      <i>Tech Lead | Back-end Developer (Java & Go) | Cloud & DevOps</i>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <ul>
+        <li>🐙 <b>GitHub:</b> <a href="https://github.com/luci-jr">@luci-jr</a></li>
+        <li>💼 <b>LinkedIn:</b> <a href="https://www.linkedin.com/in/lucivaldo-junior">lucivaldo-junior</a></li>
+        <li>📧 <b>E-mail:</b> <a href="mailto:lucivaldo.junior.dev@gmail.com">lucivaldo.junior.dev@gmail.com</a></li>
+        <li>🛰️ <b>Telegram:</b> <a href="https://t.me/luci_junior">@luci_junior</a></li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 7. 🐍 Python 3.14 (Compilação a partir da Fonte & Pyenv)
+## 📄 Licença
 
-### 🔧 Dependências de compilação C/C++:
-```bash
-sudo apt-get install -y build-essential gdb lcov pkg-config \
-libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
-libncurses-dev libreadline-dev libsqlite3-dev libssl-dev \
-tk-dev uuid-dev zlib1g-dev
-```
-
-### ⚙️ Compilação e instalação em `/opt/python3.14`:
-```bash
-tar -xf Python-3.14.4.tar.xz
-cd Python-3.14.4
-sudo ./configure --enable-optimizations --prefix=/opt/python3.14
-sudo make -j$(nproc)
-sudo make altinstall
-
-# Criação de aliases amigáveis no ~/.bashrc
-echo "alias python3.14='/opt/python3.14/bin/python3.14'" >> ~/.bashrc
-echo "alias python='/opt/python3.14/bin/python3.14'" >> ~/.bashrc
-
-# Atualização do pip
-sudo /opt/python3.14/bin/python3.14 -m ensurepip --upgrade
-sudo /opt/python3.14/bin/python3.14 -m pip install --upgrade pip
-```
-
-### 📦 Instalação e Gerenciamento de Versões com Pyenv:
-
-#### 1. Instalar o Pyenv:
-```bash
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-
-# Configurar as variáveis de ambiente no ~/.bashrc:
-echo -e '\n# Pyenv Configuration' >> ~/.bashrc
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-#### 2. Atualizar a lista de versões disponíveis (novos releases):
-```bash
-# Atualiza os índices do pyenv para enxergar novas versões lançadas do Python
-pyenv update
-```
-
-#### 3. Listar versões disponíveis para instalação:
-```bash
-# Lista todas as versões disponíveis (ou filtra pela família 3.12, 3.13, 3.14...)
-pyenv install -l | grep -E "^\s*3\.(12|13|14)"
-```
-
-#### 4. Instalar uma versão específica do Python:
-```bash
-# Instala a versão desejada (o pyenv compilará com as dependências do sistema):
-pyenv install 3.14.4
-pyenv install 3.12.8
-```
-
-#### 5. Definir e alternar versões do Python:
-```bash
-# Define a versão padrão para todo o sistema do usuário (Global):
-pyenv global 3.14.4
-
-# Define a versão exclusiva para a pasta/projeto atual (cria arquivo .python-version):
-pyenv local 3.12.8
-
-# Lista todas as versões instaladas no computador:
-pyenv versions
-
-# Mostra a versão atualmente ativa no terminal e onde foi configurada:
-pyenv version
-```
-
-#### 6. Desinstalar uma versão antiga:
-```bash
-pyenv uninstall 3.12.8
-```
-
----
-
-## 8. 🐳 Docker Engine, Docker Compose & Containers
-
-Instalação oficial do Docker Engine com o plugin compose moderno:
-
-```bash
-# Prepara chaves e repositório oficial Docker
-sudo apt install -y ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-# Configura permissão para rodar Docker sem sudo
-sudo usermod -aG docker $USER
-sudo systemctl enable --now docker.service
-sudo systemctl enable --now containerd.service
-```
-
----
-
-## 9. ☁️ AWS CLI v2 & Rclone (Nuvem & Backup)
-
-### ☁️ AWS CLI v2:
-```bash
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip -o awscliv2.zip
-sudo ./aws/install --update
-rm -rf aws awscliv2.zip
-aws --version
-```
-
-### 🔄 Rclone (Google Drive & Nexus Sync):
-```bash
-sudo apt install -y rclone
-rclone version
-```
-
----
-
-## 10. 🛠️ IDEs, Editores & Inteligência Artificial
-
-### 🌌 Antigravity IDE:
-```bash
-# Instalação via Snap oficial
-sudo snap install antigravity-ide-snap --classic
-```
-
-### 💻 Visual Studio Code:
-```bash
-sudo snap install code --classic
-```
-
-### ☕ IntelliJ IDEA Community:
-```bash
-sudo snap install intellij-idea --classic
-```
-
-### 🚀 Postman (APIs REST):
-```bash
-sudo snap install postman
-```
-
-### 🐙 GitHub Desktop:
-```bash
-# Repositório de pacotes para GitHub Desktop no Linux
-wget -qO - https://apt.packages.shiftkey.dev/gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main" > /etc/apt/sources.list.d/shiftkey-packages.list'
-sudo apt update && sudo apt install -y github-desktop
-```
-
-### 👑 Antigravity CLI / Lucy (Google DeepMind Cloud & Nexus):
-Instalação do CLI oficial (`agy`) e configuração do script executivo do Agente Pessoal Lucy na nuvem:
-```bash
-# Garante ~/.local/bin no PATH do Bash
-mkdir -p ~/.local/bin
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-
-# Valida o CLI oficial
-agy --version
-
-# Configuração do wrapper executivo (~/.local/bin/lucy):
-cat << 'EOF' > ~/.local/bin/lucy
-#!/usr/bin/env bash
-printf '\e[?7h'
-if [ -t 1 ] && command -v tput &>/dev/null; then
-    COLS=$(tput cols 2>/dev/null || echo "")
-    LINES=$(tput lines 2>/dev/null || echo "")
-    [ -n "$COLS" ] && [ -n "$LINES" ] && stty cols "$COLS" rows "$LINES" 2>/dev/null || true
-    [ -n "$COLS" ] && export COLUMNS="$COLS"
-    [ -n "$LINES" ] && export LINES="$LINES"
-fi
-exec agy -i "Ative o Agente Pessoal Lucy conforme as diretrizes do Nexus." "$@"
-EOF
-chmod +x ~/.local/bin/lucy
-```
-
-### 🦙 Ollama & Lucy Local (Modelos de IA Locais na GPU RTX 4050):
-Instalação do runner oficial do Ollama e script de execução local acelerada por hardware:
-```bash
-# Instala o runner oficial do Ollama
-curl -fsSL https://ollama.com/install.sh | sh
-ollama --version
-
-# Configuração do wrapper local (~/.local/bin/lucy-local):
-cat << 'EOF' > ~/.local/bin/lucy-local
-#!/usr/bin/env bash
-printf '\e[?7h'
-if [ -t 1 ] && command -v tput &>/dev/null; then
-    COLS=$(tput cols 2>/dev/null || echo "")
-    LINES=$(tput lines 2>/dev/null || echo "")
-    [ -n "$COLS" ] && [ -n "$LINES" ] && stty cols "$COLS" rows "$LINES" 2>/dev/null || true
-    [ -n "$COLS" ] && export COLUMNS="$COLS"
-    [ -n "$LINES" ] && export LINES="$LINES"
-fi
-if [ $# -eq 0 ]; then
-    clear
-    [ -f "$HOME/.ollama/lucy_banner.txt" ] && cat "$HOME/.ollama/lucy_banner.txt"
-    exec ollama run lucy
-else
-    exec ollama run lucy "$@"
-fi
-EOF
-chmod +x ~/.local/bin/lucy-local
-```
-
----
-
-## 11. 💬 Comunicação & Mensageria
-
-Aplicativos essenciais para alinhamento profissional, reuniões e comunidades de devs:
-
-### ✈️ Telegram Desktop:
-```bash
-sudo snap install telegram-desktop
-```
-
-### 🎮 Discord:
-```bash
-sudo snap install discord
-```
-
-### 💬 Whatsie (WhatsApp Web Desktop):
-```bash
-sudo snap install whatsie
-```
-
-### 👥 Microsoft Teams for Linux:
-```bash
-sudo snap install teams-for-linux
-```
-
----
-
-## 12. 🎨 Multimídia, Gravação & Design
-
-### 🎥 OBS Studio (Gravação de Tela & Transmissão):
-```bash
-flatpak install flathub com.obsproject.Studio -y
-```
-
-### 🎬 VLC Media Player (Reprodutor Universal):
-```bash
-sudo snap install vlc
-```
-
-### 🎨 GIMP (Manipulação & Edição de Imagens):
-```bash
-sudo snap install gimp
-```
-
-### 🎵 Amberol (Player de Áudio Minimalista):
-```bash
-sudo snap install amberol
-```
-
----
-
-## 13. 🎮 Jogos & Emulação Retrô
-
-### 🎮 Steam (Plataforma de Jogos & Proton):
-```bash
-flatpak install flathub com.valvesoftware.Steam -y
-```
-
-### 🕹️ Snes9x (Emulador de Super Nintendo):
-```bash
-flatpak install flathub com.snes9x.Snes9x -y
-```
-
----
-
-## 14. 🗄️ Bancos de Dados Locais (PostgreSQL & MySQL)
-
-### 🐘 PostgreSQL:
-```bash
-# Repositório PGDG oficial
-echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /usr/share/keyrings/postgresql.gpg > /dev/null
-
-sudo apt update
-sudo apt install -y postgresql postgresql-contrib
-
-# Iniciar e habilitar o serviço
-sudo systemctl enable --now postgresql
-```
-
-*(Dica: Para rodar PostgreSQL via Docker Compose, consulte a pasta de infraestrutura do Nexus).*
-
-### 🐬 MySQL Server:
-```bash
-sudo apt update && sudo apt install -y mysql-server
-sudo systemctl enable --now mysql
-sudo mysql_secure_installation
-```
-
----
-
-## 15. 🧹 Manutenção, Faxina & Limpeza do Sistema
-
-### 🧹 Limpeza de Pacotes Residuais APT:
-```bash
-sudo apt autoremove -y
-sudo apt autoclean
-```
-
-### 📦 Limpeza de Cache de Pacotes Snap Antigos:
-```bash
-sudo snap set system refresh.retain=2
-```
-
-### 🧩 Limpeza de Runtimes Flatpak Órfãos:
-```bash
-flatpak uninstall --unused -y
-```
-
----
-
-*Documento gerado e mantido pelo Agente Pessoal Lucy — Ecossistema Nexus.*
-
-### 🔍 Verificar o binário da versão 17 diretamente:
-```bash
-/usr/lib/postgresql/17/bin/psql --version
-```
+Este projeto está licenciado sob os termos da licença [MIT](LICENSE).
