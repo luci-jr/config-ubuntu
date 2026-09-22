@@ -1,114 +1,269 @@
-# 🚀 Guia Completo de Pós-instalação e Customização de Pacotes no Ubuntu
+# 🚀 Guia Completo de Pós-instalação e Customização de Pacotes no Ubuntu (Padrão Bash)
 
-## 📦 Instalar os pacotes git e npm e depois atualizar o sistema:
+> **Ambiente:** Ubuntu Linux (x86_64)  
+> **Mantenedor:** Lucivaldo Junior (Luci Junior)  
+> **Orquestração & Documentação:** Agente Pessoal Lucy (Ecossistema Nexus)  
+> **Stack Principal:** Java 21 LTS | Go 1.26+ | Node.js | Docker | AWS | IA Local  
+> **Shell Padrão:** Bash Nativo (`~/.bashrc`)  
+
+---
+
+## 📋 Sumário
+1. [📦 Atualização do Sistema & Pacotes Essenciais](#1--atualização-do-sistema--pacotes-essenciais)
+2. [🎛️ Utilitários Principais do Sistema (Flatpak, GNOME Tweaks & Periféricos)](#2-️-utilitários-principais-do-sistema-flatpak-gnome-tweaks--periféricos)
+3. [🌐 Navegador Web (Google Chrome)](#3--navegador-web-google-chrome)
+4. [🟢 Ecossistema Node.js & NVM](#4--ecossistema-nodejs--nvm)
+5. [🦫 Linguagem Go (Golang 1.26+)](#5--linguagem-go-golang-126)
+6. [☕ Linguagem Java (OpenJDK 21 LTS & Maven)](#6--linguagem-java-openjdk-21-lts--maven)
+7. [🐍 Python 3.14 (Compilação a partir da Fonte & Pyenv)](#7--python-314-compilação-a-partir-da-fonte--pyenv)
+8. [🐳 Docker Engine, Docker Compose & Containers](#8--docker-engine-docker-compose--containers)
+9. [☁️ AWS CLI v2 & Rclone (Nuvem & Backup)](#9--aws-cli-v2--rclone-nuvem--backup)
+10. [🛠️ IDEs, Editores & Inteligência Artificial](#10-️-ides-editores--inteligência-artificial)
+11. [💬 Comunicação & Mensageria](#11--comunicação--mensageria)
+12. [🎨 Multimídia, Gravação & Design](#12--multimídia-gravação--design)
+13. [🎮 Jogos & Emulação Retrô](#13--jogos--emulação-retrô)
+14. [🗄️ Bancos de Dados Locais (PostgreSQL & MySQL)](#14-️-bancos-de-dados-locais-postgresql--mysql)
+15. [🧹 Manutenção, Faxina & Limpeza do Sistema](#15--manutenção-faxina--limpeza-do-sistema)
+
+---
+
+## 1. 📦 Atualização do Sistema & Pacotes Essenciais
+
+Atualizar os índices de repositórios, os pacotes instalados no sistema e carregar as bibliotecas básicas de compilação:
+
 ```bash
+# Atualiza a lista de pacotes e realiza a atualização geral do sistema operacional
 sudo apt update && sudo apt upgrade -y
-sudo apt install git -y
-sudo apt install npm -y
-npm install -g typescript
-tsc --version
+
+# Instala ferramentas essenciais de build (GCC, G++, Make), Git, Curl e utilitários de compressão
+sudo apt install -y build-essential git curl wget unzip software-properties-gtk
 ```
 
-## 🌐 Instalar Google Chrome:
+---
+
+## 2. 🎛️ Utilitários Principais do Sistema (Flatpak, GNOME Tweaks & Periféricos)
+
+Categoria unificada com os utilitários indispensáveis para gerenciamento de pacotes, personalização visual do GNOME, integração de periféricos e virtualização:
+
+### 📦 Flatpak & Flathub (Gerenciador Universal de Pacotes Sandbox):
 ```bash
+# Instala o suporte a Flatpak e o plugin de integração com a GNOME Software
+sudo apt install -y flatpak gnome-software-plugin-flatpak
+
+# Adiciona o repositório oficial Flathub
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+### 🔧 GNOME Tweaks & Extension Manager (Personalização do Desktop):
+```bash
+# Ajustes finos de fontes, janelas, comportamento do mouse e gerenciamento de extensões do GNOME Shell
+sudo apt install -y gnome-tweaks gnome-shell-extension-manager
+```
+
+### 🎛️ Gear Lever (Gerenciamento e Integração Ágil de AppImages):
+```bash
+# Permite abrir, atualizar e integrar arquivos AppImage diretamente no menu de aplicativos
+flatpak install flathub it.mijorus.gearlever -y
+```
+
+### 🖱️ Solaar (Gerenciador de Periféricos sem Fio Logitech):
+```bash
+# Monitoramento de bateria e ajustes de emparelhamento para mouses e teclados Logitech
+sudo apt install -y solaar
+```
+
+### 🎮 Input Remapper (Remapeamento Avançado de Teclas e Controles):
+```bash
+# Mapeamento flexível de botões de mouse para funções customizadas, macros e gamepads
+sudo apt install -y input-remapper-gtk
+```
+
+### 📦 Gdebi (Instalador Gráfico Leve de Pacotes .deb):
+```bash
+# Instala arquivos .deb locais resolvendo e baixando automaticamente as dependências necessárias
+sudo apt install -y gdebi
+```
+
+### 🖥️ VirtualBox (Virtualização Completa de Sistemas):
+```bash
+# Virtualização de máquinas virtuais completas (Windows Server, distribuições Linux, etc.)
+sudo apt install -y virtualbox-qt
+```
+
+---
+
+## 3. 🌐 Navegador Web (Google Chrome)
+
+Instalação oficial do Google Chrome via pacote `.deb` estável:
+
+```bash
+# Baixa o pacote oficial do Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+# Instala o pacote via dpkg e resolve eventuais dependências faltantes
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt --fix-broken install -y
-sudo rm google-chrome-stable_current_amd64.deb
+
+# Remove o instalador temporário
+rm -f google-chrome-stable_current_amd64.deb
 ```
 
-## 📦 Instalar o NVM (Node Version Manager):
+---
+
+## 4. 🟢 Ecossistema Node.js & NVM
+
+Gerenciador de versões NVM para evitar conflitos de permissão e alternar facilmente entre versões:
+
 ```bash
-sudo apt install curl -y
+# Instala o NVM (Node Version Manager)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+# Carrega as variáveis do NVM no ~/.bashrc
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Instala a versão LTS mais recente e a define como padrão
+nvm install --lts
+nvm use --lts
+nvm alias default 'lts/*'
+
+# Instala TypeScript e utilitários globais
+npm install -g typescript @angular/cli
 ```
 
-### ⚡ Carregar o NVM no terminal:
-```bash
-source ~/.nvm/nvm.sh
-```
+---
 
-### 🚀 Instalar a versão mais recente do Node.js:
-```bash
-nvm install node  # Última versão estável
-nvm install --lts # Última versão LTS
-```
+## 5. 🦫 Linguagem Go (Golang 1.26+)
 
-### ⚙️ Definir uma versão específica do Node:
-```bash
-nvm use 22.12.0
-```
+Instalação limpa do runtime oficial de Go a partir do binário compilado:
 
-## 🐍 Instalar Python a partir do código-fonte
-
-### 📁 Extrair e entrar no diretório:
 ```bash
-tar -xf Python-3.14.2.tar.xz
-cd Python-3.14.2
-```
+# Remove instalações antigas e baixa a versão mais recente do Go
+sudo rm -rf /usr/local/go
+wget https://go.dev/dl/go1.26.4.linux-amd64.tar.gz
 
-### 🔧 Instalar depend�?ncias de compilação:
-```bash
-sudo apt-get install build-essential gdb lcov pkg-config \
-libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
-libncurses-dev libreadline-dev libsqlite3-dev libssl-dev \
-tk-dev uuid-dev zlib1g-dev -y
-```
+# Extrai para /usr/local
+sudo tar -C /usr/local -xzf go1.26.4.linux-amd64.tar.gz
+rm -f go1.26.4.linux-amd64.tar.gz
 
-### ⚙️ Compilar e instalar o Python:
-```bash
-sudo ./configure --enable-optimizations --prefix=/opt/python3.14
-sudo make -j$(nproc)
-sudo make altinstall
-echo "alias python3.14='/opt/python3.14/bin/python3.14'" >> ~/.bashrc
+# Adiciona o Go ao PATH no ~/.bashrc
+echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> ~/.bashrc
 source ~/.bashrc
+
+# Valida a instalação
+go version
 ```
 
-### ✅ Verificar a instalação:
-```bash
-python3.14 --version
-```
+---
 
-### 📦 Instalar depend�?ncias com pip:
-```bash
-python3.14 -m pip install --upgrade pip
- /opt/python3.14/bin/python3.14 -m ensurepip --upgrade
-```
+## 6. ☕ Linguagem Java (OpenJDK 21 LTS & Maven)
 
-## 📦 Instalando o Pyenv
-```bash
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-```
+Stack principal para desenvolvimento corporativo com Spring Boot:
 
-### ⚙️ Configurando o Pyenv no .bashrc
 ```bash
-echo -e '\nexport PYENV_ROOT="$HOME/.pyenv"\n[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"\neval "$(pyenv init -)"' >> ~/.bashrc
-source ~/.bashrc
-```
+# Instala o JDK 21 LTS e Maven
+sudo apt install -y openjdk-21-jdk maven
 
-### 🐍 Instalando Python via Pyenv
-```bash
-pyenv update
-pyenv install -l
-pyenv install 3.14.2
-pyenv global 3.14.2
-```
-
-### 📦 Instalar Maven
-```bash
-sudo apt install maven -y
+# Valida as versões instaladas
+java -version
+javac -version
 mvn -version
 ```
 
-## ☕ Instalar Java (OpenJDK):
+*(Opcional: Para compatibilidade com projetos legados JDK 11: `sudo apt install -y openjdk-11-jdk`)*
+
+---
+
+## 7. 🐍 Python 3.14 (Compilação a partir da Fonte & Pyenv)
+
+### 🔧 Dependências de compilação C/C++:
 ```bash
-sudo apt install openjdk-21-jdk -y
-java -version
+sudo apt-get install -y build-essential gdb lcov pkg-config \
+libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
+libncurses-dev libreadline-dev libsqlite3-dev libssl-dev \
+tk-dev uuid-dev zlib1g-dev
 ```
 
-## 🐳 Instalar Docker:
+### ⚙️ Compilação e instalação em `/opt/python3.14`:
 ```bash
-sudo apt-get install ca-certificates curl -y
+tar -xf Python-3.14.4.tar.xz
+cd Python-3.14.4
+sudo ./configure --enable-optimizations --prefix=/opt/python3.14
+sudo make -j$(nproc)
+sudo make altinstall
+
+# Criação de aliases amigáveis no ~/.bashrc
+echo "alias python3.14='/opt/python3.14/bin/python3.14'" >> ~/.bashrc
+echo "alias python='/opt/python3.14/bin/python3.14'" >> ~/.bashrc
+
+# Atualização do pip
+sudo /opt/python3.14/bin/python3.14 -m ensurepip --upgrade
+sudo /opt/python3.14/bin/python3.14 -m pip install --upgrade pip
+```
+
+### 📦 Instalação e Gerenciamento de Versões com Pyenv:
+
+#### 1. Instalar o Pyenv:
+```bash
+curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+
+# Configurar as variáveis de ambiente no ~/.bashrc:
+echo -e '\n# Pyenv Configuration' >> ~/.bashrc
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### 2. Atualizar a lista de versões disponíveis (novos releases):
+```bash
+# Atualiza os índices do pyenv para enxergar novas versões lançadas do Python
+pyenv update
+```
+
+#### 3. Listar versões disponíveis para instalação:
+```bash
+# Lista todas as versões disponíveis (ou filtra pela família 3.12, 3.13, 3.14...)
+pyenv install -l | grep -E "^\s*3\.(12|13|14)"
+```
+
+#### 4. Instalar uma versão específica do Python:
+```bash
+# Instala a versão desejada (o pyenv compilará com as dependências do sistema):
+pyenv install 3.14.4
+pyenv install 3.12.8
+```
+
+#### 5. Definir e alternar versões do Python:
+```bash
+# Define a versão padrão para todo o sistema do usuário (Global):
+pyenv global 3.14.4
+
+# Define a versão exclusiva para a pasta/projeto atual (cria arquivo .python-version):
+pyenv local 3.12.8
+
+# Lista todas as versões instaladas no computador:
+pyenv versions
+
+# Mostra a versão atualmente ativa no terminal e onde foi configurada:
+pyenv version
+```
+
+#### 6. Desinstalar uma versão antiga:
+```bash
+pyenv uninstall 3.12.8
+```
+
+---
+
+## 8. 🐳 Docker Engine, Docker Compose & Containers
+
+Instalação oficial do Docker Engine com o plugin compose moderno:
+
+```bash
+# Prepara chaves e repositório oficial Docker
+sudo apt install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -116,260 +271,235 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-```
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-### ⚙️ Configurar permissões do Docker:
-```bash
-sudo groupadd docker
+# Configura permissão para rodar Docker sem sudo
 sudo usermod -aG docker $USER
-newgrp docker
-docker run hello-world
-sudo systemctl start docker
-sudo systemctl enable docker
-sudo systemctl enable docker.service
-sudo systemctl enable containerd.service
+sudo systemctl enable --now docker.service
+sudo systemctl enable --now containerd.service
 ```
 
-### 🔧 Ajustar permissões adicionais:
+---
+
+## 9. ☁️ AWS CLI v2 & Rclone (Nuvem & Backup)
+
+### ☁️ AWS CLI v2:
 ```bash
-sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-sudo chmod g+rwx "$HOME/.docker" -R
-sudo systemctl start docker
-sudo systemctl enable docker
-sudo systemctl enable docker.service
-sudo systemctl enable containerd.service
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip -o awscliv2.zip
+sudo ./aws/install --update
+rm -rf aws awscliv2.zip
+aws --version
 ```
 
-## 📦 Instalar Docker Compose:
+### 🔄 Rclone (Google Drive & Nexus Sync):
 ```bash
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-docker-compose --version
-
-sudo apt install -y docker-compose-plugin
-docker-compose --version
+sudo apt install -y rclone
+rclone version
 ```
 
-## ☁️ Instalar AWS CLI v2
+---
+
+## 10. 🛠️ IDEs, Editores & Inteligência Artificial
+
+### 🌌 Antigravity IDE:
 ```bash
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip -o awscliv2.zip && sudo ./aws/install --update && aws --version
+# Instalação via Snap oficial
+sudo snap install antigravity-ide-snap --classic
 ```
 
-## 🛠️ Outros aplicativos para instalar
-
-### 📦 Instalar Flatpak e OBS Studio 🎥
-```bash
-sudo apt install flatpak
-sudo apt install gnome-software-plugin-flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub com.obsproject.Studio -y
-```
-
-### 🎧 Instalar Blanket (sons de fundo)
-```bash
-flatpak install flathub com.rafaelmardojai.Blanket -y
-flatpak run com.rafaelmardojai.Blanket (se não aparecer o ícone para executar)
-```
-
-### 💻 VS Code
+### 💻 Visual Studio Code:
 ```bash
 sudo snap install code --classic
 ```
 
-### 🧠 IntelliJ IDEA
+### ☕ IntelliJ IDEA Community:
 ```bash
-sudo snap install intellij-idea-community --classic
+sudo snap install intellij-idea --classic
 ```
 
-### 🌍 Eclipse
+### 🚀 Postman (APIs REST):
 ```bash
-sudo snap install eclipse --classic
+sudo snap install postman
 ```
 
-### 🔺 Angular CLI
+### 🐙 GitHub Desktop:
 ```bash
-sudo npm install -g @angular/cli
-ng version
+# Repositório de pacotes para GitHub Desktop no Linux
+wget -qO - https://apt.packages.shiftkey.dev/gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main" > /etc/apt/sources.list.d/shiftkey-packages.list'
+sudo apt update && sudo apt install -y github-desktop
 ```
 
-### 📱 Ionic CLI
+### 👑 Antigravity CLI / Lucy (Google DeepMind Cloud & Nexus):
+Instalação do CLI oficial (`agy`) e configuração do script executivo do Agente Pessoal Lucy na nuvem:
 ```bash
-sudo npm install -g @ionic/cli
-ionic --version
+# Garante ~/.local/bin no PATH do Bash
+mkdir -p ~/.local/bin
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+# Valida o CLI oficial
+agy --version
+
+# Configuração do wrapper executivo (~/.local/bin/lucy):
+cat << 'EOF' > ~/.local/bin/lucy
+#!/usr/bin/env bash
+printf '\e[?7h'
+if [ -t 1 ] && command -v tput &>/dev/null; then
+    COLS=$(tput cols 2>/dev/null || echo "")
+    LINES=$(tput lines 2>/dev/null || echo "")
+    [ -n "$COLS" ] && [ -n "$LINES" ] && stty cols "$COLS" rows "$LINES" 2>/dev/null || true
+    [ -n "$COLS" ] && export COLUMNS="$COLS"
+    [ -n "$LINES" ] && export LINES="$LINES"
+fi
+exec agy -i "Ative o Agente Pessoal Lucy conforme as diretrizes do Nexus." "$@"
+EOF
+chmod +x ~/.local/bin/lucy
 ```
 
-### 🦋 Flutter via Snap
+### 🦙 Ollama & Lucy Local (Modelos de IA Locais na GPU RTX 4050):
+Instalação do runner oficial do Ollama e script de execução local acelerada por hardware:
 ```bash
-sudo snap install flutter --classic
+# Instala o runner oficial do Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+ollama --version
+
+# Configuração do wrapper local (~/.local/bin/lucy-local):
+cat << 'EOF' > ~/.local/bin/lucy-local
+#!/usr/bin/env bash
+printf '\e[?7h'
+if [ -t 1 ] && command -v tput &>/dev/null; then
+    COLS=$(tput cols 2>/dev/null || echo "")
+    LINES=$(tput lines 2>/dev/null || echo "")
+    [ -n "$COLS" ] && [ -n "$LINES" ] && stty cols "$COLS" rows "$LINES" 2>/dev/null || true
+    [ -n "$COLS" ] && export COLUMNS="$COLS"
+    [ -n "$LINES" ] && export LINES="$LINES"
+fi
+if [ $# -eq 0 ]; then
+    clear
+    [ -f "$HOME/.ollama/lucy_banner.txt" ] && cat "$HOME/.ollama/lucy_banner.txt"
+    exec ollama run lucy
+else
+    exec ollama run lucy "$@"
+fi
+EOF
+chmod +x ~/.local/bin/lucy-local
 ```
 
-## 🎯 Outros aplicativos úteis
+---
+
+## 11. 💬 Comunicação & Mensageria
+
+Aplicativos essenciais para alinhamento profissional, reuniões e comunidades de devs:
+
+### ✈️ Telegram Desktop:
 ```bash
-sudo apt install gdebi -y
-sudo apt install gnome-tweaks -y
-sudo snap install vlc --classic
-sudo snap install amberol --classic
+sudo snap install telegram-desktop
 ```
 
-## 🔄 Limpar pacotes antigos
+### 🎮 Discord:
+```bash
+sudo snap install discord
+```
+
+### 💬 Whatsie (WhatsApp Web Desktop):
+```bash
+sudo snap install whatsie
+```
+
+### 👥 Microsoft Teams for Linux:
+```bash
+sudo snap install teams-for-linux
+```
+
+---
+
+## 12. 🎨 Multimídia, Gravação & Design
+
+### 🎥 OBS Studio (Gravação de Tela & Transmissão):
+```bash
+flatpak install flathub com.obsproject.Studio -y
+```
+
+### 🎬 VLC Media Player (Reprodutor Universal):
+```bash
+sudo snap install vlc
+```
+
+### 🎨 GIMP (Manipulação & Edição de Imagens):
+```bash
+sudo snap install gimp
+```
+
+### 🎵 Amberol (Player de Áudio Minimalista):
+```bash
+sudo snap install amberol
+```
+
+---
+
+## 13. 🎮 Jogos & Emulação Retrô
+
+### 🎮 Steam (Plataforma de Jogos & Proton):
+```bash
+flatpak install flathub com.valvesoftware.Steam -y
+```
+
+### 🕹️ Snes9x (Emulador de Super Nintendo):
+```bash
+flatpak install flathub com.snes9x.Snes9x -y
+```
+
+---
+
+## 14. 🗄️ Bancos de Dados Locais (PostgreSQL & MySQL)
+
+### 🐘 PostgreSQL:
+```bash
+# Repositório PGDG oficial
+echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /usr/share/keyrings/postgresql.gpg > /dev/null
+
+sudo apt update
+sudo apt install -y postgresql postgresql-contrib
+
+# Iniciar e habilitar o serviço
+sudo systemctl enable --now postgresql
+```
+
+*(Dica: Para rodar PostgreSQL via Docker Compose, consulte a pasta de infraestrutura do Nexus).*
+
+### 🐬 MySQL Server:
+```bash
+sudo apt update && sudo apt install -y mysql-server
+sudo systemctl enable --now mysql
+sudo mysql_secure_installation
+```
+
+---
+
+## 15. 🧹 Manutenção, Faxina & Limpeza do Sistema
+
+### 🧹 Limpeza de Pacotes Residuais APT:
 ```bash
 sudo apt autoremove -y
 sudo apt autoclean
 ```
 
-## 🧩 Zsh + Oh My Zsh + Spaceship Prompt - Ubuntu 22.04
-
-### ⚡ 1. Instalar Zsh
-
+### 📦 Limpeza de Cache de Pacotes Snap Antigos:
 ```bash
-sudo apt update
-sudo apt install zsh -y
-which zsh
-chsh -s /usr/bin/zsh
+sudo snap set system refresh.retain=2
 ```
 
-Reinicie o terminal ou faça logout/login.
-
----
-
-### 🛠️ 2. Instalar Oh My Zsh
-
+### 🧩 Limpeza de Runtimes Flatpak Órfãos:
 ```bash
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+flatpak uninstall --unused -y
 ```
 
 ---
 
-### 🚀 3. Instalar Spaceship Prompt
-
-```bash
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-```
-
-Edite `nano ~/.zshrc`:
-
-```bash
-ZSH_THEME="spaceship"
-```
-
----
-
-### 🔹 4. Plugins essenciais
-
-#### Autosuggestions
-
-```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-```
-
-#### Syntax Highlighting
-
-```bash
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-```
-
-No `nano ~/.zshrc`:
-
-```bash
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-```
-
----
-
-### 🔄 5. Recarregar configurações
-
-```bash
-source ~/.zshrc
-```
-
----
-
-### 🎉 Pronto!
-
-* Sugestões automáticas de comandos
-* Destaque de sintaxe
-* Prompt informativo e personalizável
-
-#### 💡 Dica
-
-Atualizar Oh My Zsh:
-
-```bash
-omz update
-```
-
-
-## 🐬 Instalar MySQL Server
-
-### 📦 Instalar MySQL Server:
-```bash
-sudo apt update
-sudo apt install mysql-server -y
-```
-
-### 🔧 Verificar o status do MySQL:
-```bash
-sudo systemctl status mysql
-```
-
-### 🔧 Configurar o MySQL (opcional):
-```bash
-sudo mysql_secure_installation
-```
-
-y 2 y y y y
-
-
-### 🔑 Acessar o MySQL:
-```bash
-sudo mysql -u root -p
-```
-
-## 🐘 Instalar PostgreSQL 17
-
-### 📥 Adicionar o repositório oficial (PGDG):
-```bash
-echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /usr/share/keyrings/postgresql.gpg > /dev/null
-```
-
-### 🔄 Atualizar os pacotes:
-```bash
-sudo apt update
-```
-
-### 🐘 Instalar o PostgreSQL Server (versão 17):
-```bash
-sudo apt install postgresql-17 postgresql-client-17 -y
-```
-
-### 🔧 Verificar o status do PostgreSQL:
-```bash
-sudo systemctl status postgresql
-```
-
-### ⚡ Habilitar o serviço ao iniciar:
-```bash
-sudo systemctl enable postgresql
-```
-
-### 🚪 Acessar o PostgreSQL com o usuário padrão:
-```bash
-sudo -i -u postgres
-psql
-```
-
-### 🔑 Acessar o PostgreSQL diretamente:
-```bash
-sudo -u postgres psql
-```
-
-### ✅ Verificar a versão instalada:
-```bash
-psql --version
-```
+*Documento gerado e mantido pelo Agente Pessoal Lucy — Ecossistema Nexus.*
 
 ### 🔍 Verificar o binário da versão 17 diretamente:
 ```bash
