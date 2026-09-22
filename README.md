@@ -102,24 +102,27 @@ Ao configurar uma máquina do zero, execute as etapas nesta ordem lógica:
 
 ## 👨‍💻 Autor & Contato
 
-<table align="center">
-  <tr>
-    <td align="center">
-      <b>Lucivaldo Junior</b><br>
-      <i>Tech Lead | Back-end Developer (Java & Go) | Cloud & DevOps</i>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <ul>
-        <li>🐙 <b>GitHub:</b> <a href="https://github.com/luci-jr">@luci-jr</a></li>
-        <li>💼 <b>LinkedIn:</b> <a href="https://www.linkedin.com/in/lucivaldo-junior">lucivaldo-junior</a></li>
-        <li>📧 <b>E-mail:</b> <a href="mailto:lucivaldo.junior.dev@gmail.com">lucivaldo.junior.dev@gmail.com</a></li>
-        <li>🛰️ <b>Telegram:</b> <a href="https://t.me/luci_junior">@luci_junior</a></li>
-      </ul>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <pre>
+======-::--=-=-----=-.:..--.-+++*+
+======-:-----:... ..::.--:..-++=--  👤 AUTOR:       Lucivaldo Junior (Luci Junior)
++=====-:-:.     .    :-=++=-==-:=*  🐧 SISTEMA:     Ubuntu 26.04.1 LTS (Workstation)
++++===-::    =#%@@%#. --==+++==-=+  ────────────────────────────────────────────────
+++++==-.   .::=+*@@@%-.:-=====-..:  🧠 PAPEL:       Tech Lead & Arquiteto Back-end
+**++++:   .++:==:%=:+#..:-====:..:  ☕ STACK:       Java 21 | Go 1.22+ | Docker
+======:   .+##+--#***@-.::====---=  ☁️ NUVEM:       AWS | Docker Swarm | Linux
+      ...  .===++-=*##...:=====+++  🛠️ TOOLCHAIN:   Spring Boot | PostgreSQL | Redis
+        ..  :==+*#%*#*. .-======++  🤖 ECOSSISTEMA: Nexus & Lucy (Automação & IA)
+ ...     .  -=+**#%%#%%*+=-===++==  🐙 GITHUB:      https://github.com/luci-jr
+**++.    ::..==+=+*##%%%%%++##**#=  💼 LINKEDIN:    https://linkedin.com/in/lucivaldo-junior
+####-     --::.  =.:-==*##%*--:+#%  ────────────────────────────────────────────────
+***#-      -=-:.:+    --+##%#:  .-  "Fala, irmão! O que tu queres codar?"
+*#*#.       .::..      .--:=#%=     Sempre aberto a conexões técnicas e novos projetos.
+***-                    .::==*#=    📍 Belém, Pará — Brasil
+++-                      :--:-=*+.  📧 lucivaldo.junior.dev@gmail.com
+=-                    .-+-:-+=-:-+  🛰️ Telegram: @luci_junior
+  </pre>
+</div>
 
 ---
 
