@@ -103,26 +103,42 @@ Ao configurar uma máquina do zero, execute as etapas nesta ordem lógica:
 ## 👨‍💻 Autor & Contato
 
 <div align="center">
-  <pre>
-======-::--=-=-----=-.:..--.-+++*+
-======-:-----:... ..::.--:..-++=--  👤 AUTOR:       Lucivaldo Junior (Luci Junior)
-+=====-:-:.     .    :-=++=-==-:=*  🐧 SISTEMA:     Ubuntu 26.04.1 LTS (Workstation)
-+++===-::    =#%@@%#. --==+++==-=+  ────────────────────────────────────────────────
-++++==-.   .::=+*@@@%-.:-=====-..:  🧠 PAPEL:       Tech Lead & Arquiteto Back-end
-**++++:   .++:==:%=:+#..:-====:..:  ☕ STACK:       Java 21 | Go 1.22+ | Docker
-======:   .+##+--#***@-.::====---=  ☁️ NUVEM:       AWS | Docker Swarm | Linux
-      ...  .===++-=*##...:=====+++  🛠️ TOOLCHAIN:   Spring Boot | PostgreSQL | Redis
-        ..  :==+*#%*#*. .-======++  🤖 ECOSSISTEMA: Nexus & Lucy (Automação & IA)
- ...     .  -=+**#%%#%%*+=-===++==  🐙 GITHUB:      https://github.com/luci-jr
-**++.    ::..==+=+*##%%%%%++##**#=  💼 LINKEDIN:    https://linkedin.com/in/lucivaldo-junior
-####-     --::.  =.:-==*##%*--:+#%  ────────────────────────────────────────────────
-***#-      -=-:.:+    --+##%#:  .-  "Fala, irmão! O que tu queres codar?"
-*#*#.       .::..      .--:=#%=     Sempre aberto a conexões técnicas e novos projetos.
-***-                    .::==*#=    📍 Belém, Pará — Brasil
-++-                      :--:-=*+.  📧 lucivaldo.junior.dev@gmail.com
-=-                    .-+-:-+=-:-+  🛰️ Telegram: @luci_junior
-  </pre>
+  <kbd>
+    <img src="https://github.com/luci-jr.png" width="160" alt="Lucivaldo Junior" />
+  </kbd>
+  <br><br>
+
+  <h1 align="center"><font color="#00bfbf">Lucivaldo Junior</font></h1>
+
+  <h3 align="center">⚡ Desenvolvedor Back-end | Java (Spring Boot) | Go | AWS | Docker | PostgreSQL</h3>
+
+  <p align="center">
+    <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white"/>
+    <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+    <img src="https://img.shields.io/badge/PostgreSQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white"/>
+  </p>
 </div>
+
+---
+
+<h2 align="center">📫 Entre em Contato</h2>
+<table align="center">
+<tr>
+<td align="center" width="120">
+<a href="https://www.linkedin.com/in/lucivaldojr/" target="_blank">
+<img src="https://skillicons.dev/icons?i=linkedin" width="50"/><br><sub><b>LinkedIn</b></sub>
+</a>
+</td>
+<td align="center" width="120">
+<a href="mailto:lucivaldo.junior.dev@gmail.com" target="_blank">
+<img src="https://skillicons.dev/icons?i=gmail" width="50"/><br><sub><b>E-mail</b></sub>
+</a>
+</td>
+</tr>
+</table>
 
 ---
 
